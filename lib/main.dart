@@ -122,7 +122,10 @@
 // }
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'blocs/device/device_bloc.dart';
+import 'blocs/device/device_event.dart';
 import 'pages/home_page.dart';
 import 'pages/pairing_page.dart';
 import 'pages/devices_page.dart';
@@ -143,7 +146,11 @@ class MyDomoticApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.indigo,
       ),
-      home: const MainNavigation(),
+      home: BlocProvider(
+        create: (context) =>
+          DeviceBloc()..add(LoadDevicesEvent()),
+        child: const MainNavigation(),
+      ),
     );
   }
 }

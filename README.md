@@ -16,7 +16,7 @@ For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 
-## Dossier	        Rôle
+## Dossier	            Rôle
     pages	            Les écrans de l’application
     widgets	            Composants réutilisables
     models	            Modèles de données
@@ -36,7 +36,7 @@ samples, guidance on mobile development, and a full API reference.
     ├── theme/
     └── navigation/
 
-## Page	            Fonction
+## Page	                Fonction
     Accueil	            Vue globale des appareils
     Appairage	        Ajouter un appareil
     Appareils	        Liste + gestion
@@ -79,3 +79,15 @@ samples, guidance on mobile development, and a full API reference.
     ├── widgets/
     ├── database/
     └── main.dart
+
+## Package	        Rôle
+flutter_bloc	    Intégration Flutter
+bloc	            Moteur BLoC
+equatable	        Comparaison propre des états
+
+## Ce que fat=it BLoC 
+LoadDevicesEvent -> création d'appareils simulés -> DeviceLoaded
+
+### Lors d'un toggle 
+ToggleDeviceEvent -> mise à jour d’un appareil -> nouvel état DeviceLoaded -> UI reconstruite automatiquement
+
