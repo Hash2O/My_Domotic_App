@@ -5,6 +5,8 @@ import '../blocs/device/device_bloc.dart';
 import '../blocs/device/device_event.dart';
 import '../blocs/device/device_state.dart';
 
+import '../widgets/device_card.dart';
+
 class DevicesPage extends StatelessWidget {
   const DevicesPage({super.key});
 
@@ -12,6 +14,7 @@ class DevicesPage extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Scaffold(
+
       appBar: AppBar(
         title: const Text('Mes appareils'),
       ),
@@ -21,44 +24,42 @@ class DevicesPage extends StatelessWidget {
 
           if (state is DeviceLoaded) {
 
-            return ListView.builder(
-              itemCount: state.devices.length,
+            return ListView(
+              children: [
 
-              itemBuilder: (context, index) {
+                const SizedBox(height: 10),
 
-                final device = state.devices[index];
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                  ),
 
-                return Card(
-                  margin: const EdgeInsets.all(10),
+                  child: Text(
+                    '${state.devices.length} appareils connectés',
 
-                  child: ListTile(
-                    leading: Icon(
-                      device.type == 'Light'
-                          ? Icons.lightbulb
-                          : device.type == 'Security'
-                              ? Icons.security
-                              : Icons.thermostat,
-                    ),
-
-                    title: Text(device.name),
-
-                    subtitle: Text(
-                      device.isOn ? 'Activé' : 'Désactivé',
-                    ),
-
-                    trailing: Switch(
-                      value: device.isOn,
-
-                      onChanged: (_) {
-
-                        context.read<DeviceBloc>().add(
-                          ToggleDeviceEvent(device.id),
-                        );
-                      },
+                    style: const TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                );
-              },
+                ),
+
+                const SizedBox(height: 10),
+
+                ...state.devices.map((device) {
+
+                  return DeviceCard(
+                    device: device,
+
+                    onToggle: () {
+
+                      context.read<DeviceBloc>().add(
+                        ToggleDeviceEvent(device.id),
+                      );
+                    },
+                  );
+                }).toList(),
+              ],
             );
           }
 

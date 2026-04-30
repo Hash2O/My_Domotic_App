@@ -131,6 +131,8 @@ import 'pages/pairing_page.dart';
 import 'pages/devices_page.dart';
 import 'pages/profile_page.dart';
 
+import 'theme/app_theme.dart';
+
 void main() {
   runApp(const MyDomoticApp());
 }
@@ -143,9 +145,7 @@ class MyDomoticApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'My Domotic App',
-      theme: ThemeData(
-        primarySwatch: Colors.indigo,
-      ),
+      theme: AppTheme.darkTheme,
       home: BlocProvider(
         create: (context) =>
           DeviceBloc()..add(LoadDevicesEvent()),
