@@ -62,7 +62,7 @@ samples, guidance on mobile development, and a full API reference.
             ↓
     UI reconstruite automatiquement
 
-### Evolution de l'arborescence avec BLoC 
+### Arborescence avec BLoC 
 
     lib/                     
     ├── blocs/ 
@@ -71,9 +71,21 @@ samples, guidance on mobile development, and a full API reference.
     │   │   ├── device_event.dart
     │   │   └── device_state.dart
     │   ├── auth/
+    │   │   ├── auth_bloc.dart
+    │   │   ├── auth_event.dart
+    │   │   └── auth_state.dart
+    │   │
     │   └── pairing/
+    ├── services/
+    │   └── auth_service.dart
     ├── models/
     ├── pages/
+    │   ├── devices_page.dart
+    │   ├── home_page.dart
+    │   ├── login_page.dart
+    │   ├── pairing_page.dart
+    │   ├── profile_page.dart
+    │   └── register_page.dart
     ├── repositories/
     ├── services/
     ├── widgets/
@@ -85,9 +97,14 @@ flutter_bloc	    Intégration Flutter
 bloc	            Moteur BLoC
 equatable	        Comparaison propre des états
 
-## Ce que fat=it BLoC 
+## Ce que fait le BLoC Device
 LoadDevicesEvent -> création d'appareils simulés -> DeviceLoaded
 
 ### Lors d'un toggle 
 ToggleDeviceEvent -> mise à jour d’un appareil -> nouvel état DeviceLoaded -> UI reconstruite automatiquement
 
+## BLoC Login 
+    UI -> LoginEvent -> HTTP POST /login -> JWT reçu -> stockage local -> AuthSuccess
+
+## BLoC Register
+    UI -> RegisterEvent -> POST /register -> utilisateur créé -> AuthSuccess

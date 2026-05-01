@@ -131,6 +131,10 @@ import 'pages/pairing_page.dart';
 import 'pages/devices_page.dart';
 import 'pages/profile_page.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'services/auth_service.dart';
+import 'blocs/auth/auth_bloc.dart';
+
 import 'theme/app_theme.dart';
 
 void main() {
@@ -146,11 +150,24 @@ class MyDomoticApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'My Domotic App',
       theme: AppTheme.darkTheme,
-      home: BlocProvider(
-        create: (context) =>
-          DeviceBloc()..add(LoadDevicesEvent()),
-        child: const MainNavigation(),
-      ),
+home: MultiBlocProvider(
+
+  providers: [
+
+    BlocProvider(
+      create: (_) =>
+          DeviceBloc()
+            ..add(LoadDevicesEvent()),
+    ),
+
+    BlocProvider(
+      create: (_) =>
+          AuthBloc(AuthService()),
+    ),
+  ],
+
+  child: const MainNavigation(),
+),
     );
   }
 }

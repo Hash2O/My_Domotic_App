@@ -58,7 +58,7 @@ class DevicesPage extends StatelessWidget {
                       );
                     },
                   );
-                }).toList(),
+                }),
               ],
             );
           }
